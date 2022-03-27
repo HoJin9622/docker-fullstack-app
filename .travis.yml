@@ -1,0 +1,23 @@
+language: generic
+
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t kiss0104040/react-test-app -f ./frontend/Dockerfile.dev ./frontend
+
+script:
+  - docker run -e CI=true kiss0104040/react-test-app npm run test
+
+after_success:
+  - docker build -t kiss0104040/docker-frontend ./frontend
+  - docker build -t kiss0104040/docker-backend ./backend
+  - docker build -t kiss0104040/docker-nginx ./nginx
+
+  - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
+
+  - docker push kiss0104040/docker-frontend
+  - docker push kiss0104040/docker-backend
+  - docker push kiss0104040/docker-nginx
