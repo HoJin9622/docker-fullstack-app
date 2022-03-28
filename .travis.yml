@@ -24,10 +24,8 @@ after_success:
 
 deploy:
   provider: elasticbeanstalk
-  access_key_id:
-    secure: 'Encrypted <AWS_ACCESS_KEY>='
-  secret_access_key:
-    secure: 'Encypted <AWS_SECRET_ACCESS_KEY>='
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
   region: 'ap-northeast-2'
   app: 'docker-fullstack-app'
   env: 'Dockerfullstackapp-env'
