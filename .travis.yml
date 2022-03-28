@@ -24,13 +24,11 @@ after_success:
 
 deploy:
   provider: elasticbeanstalk
+  access_key_id:
+    secure: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_ACCESS_KEY
   region: 'ap-northeast-2'
   app: 'docker-fullstack-app'
   env: 'Dockerfullstackapp-env'
-  bucket_name: 'elasticbeanstalk-ap-northeast-2-05501921245'
-  bucket_path: 'docker-fullstack-app'
-  on:
-    branch: master
-
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_ACCESS_KEY
+  bucket_name: 'docker-fullstack-app'
